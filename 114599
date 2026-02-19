@@ -1,0 +1,190 @@
+local ScreenGui = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local line = Instance.new("Frame")
+local user = Instance.new("ImageLabel")
+local name = Instance.new("TextLabel")
+local title = Instance.new("TextLabel")
+local firsttex = Instance.new("TextBox")
+local targte = Instance.new("TextBox")
+local msg = Instance.new("TextBox")
+local vai = Instance.new("TextButton")
+
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Parent = game.CoreGui
+
+main.Name = "main"
+main.Parent = ScreenGui
+main.BackgroundColor3 = Color3.fromRGB(123, 57, 188)
+main.BorderSizePixel = 0
+main.Position = UDim2.new(0.414691955, 0, 0.30658105, 0)
+main.Size = UDim2.new(0, 385, 0, 299)
+main.Active = true
+
+line.Name = "line"
+line.Parent = main
+line.BackgroundColor3 = Color3.fromRGB(135, 63, 208)
+line.BorderSizePixel = 0
+line.Size = UDim2.new(0, 385, 0, 47)
+
+user.Name = "user"
+user.Parent = line
+user.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+user.BackgroundTransparency = 1.000
+user.BorderSizePixel = 0
+user.Position = UDim2.new(0.223376632, 0, 1.2978723, 0)
+user.Size = UDim2.new(0, 44, 0, 31)
+user.Image = "http://www.roblox.com/asset/?id=2484564290"
+user.ScaleType = Enum.ScaleType.Fit
+
+name.Name = "name"
+name.Parent = user
+name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+name.BackgroundTransparency = 1.000
+name.BorderSizePixel = 0
+name.ClipsDescendants = true
+name.Position = UDim2.new(1, 0, 0, 0)
+name.Size = UDim2.new(0, 234, 0, 31)
+name.Font = Enum.Font.SourceSansLight
+name.Text = ""
+name.TextColor3 = Color3.fromRGB(255, 255, 255)
+name.TextSize = 23.000
+name.TextXAlignment = Enum.TextXAlignment.Left
+
+title.Name = "title"
+title.Parent = main
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1.000
+title.BorderSizePixel = 0
+title.Position = UDim2.new(0.0415584408, 0, 0, 0)
+title.Size = UDim2.new(0, 369, 0, 50)
+title.Font = Enum.Font.SourceSansLight
+title.Text = "Chat Hax FE"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 25.000
+title.TextXAlignment = Enum.TextXAlignment.Left
+
+firsttex.Name = "firsttex"
+firsttex.Parent = main
+firsttex.BackgroundColor3 = Color3.fromRGB(135, 63, 208)
+firsttex.BorderSizePixel = 0
+firsttex.ClipsDescendants = true
+firsttex.Position = UDim2.new(0.166233778, 0, 0.367892981, 0)
+firsttex.Size = UDim2.new(0, 241, 0, 40)
+firsttex.Font = Enum.Font.SourceSansLight
+firsttex.PlaceholderText = "First Text (Optional)"
+firsttex.Text = ""
+firsttex.TextColor3 = Color3.fromRGB(255, 255, 255)
+firsttex.TextSize = 20.000
+
+targte.Name = "targte"
+targte.Parent = main
+targte.BackgroundColor3 = Color3.fromRGB(135, 63, 208)
+targte.BorderSizePixel = 0
+targte.ClipsDescendants = true
+targte.Position = UDim2.new(0.166233778, 0, 0.548494995, 0)
+targte.Size = UDim2.new(0, 241, 0, 40)
+targte.Font = Enum.Font.SourceSansLight
+targte.PlaceholderText = "Target..(can be anything)"
+targte.ClearTextOnFocus = false
+targte.Text = ""
+targte.TextColor3 = Color3.fromRGB(255, 255, 255)
+targte.TextSize = 20.000
+
+msg.Name = "msg"
+msg.Parent = main
+msg.BackgroundColor3 = Color3.fromRGB(135, 63, 208)
+msg.BorderSizePixel = 0
+msg.ClipsDescendants = true
+msg.Position = UDim2.new(0.166233778, 0, 0.725752473, 0)
+msg.Size = UDim2.new(0, 142, 0, 29)
+msg.Font = Enum.Font.SourceSansLight
+msg.PlaceholderText = "Message to Send"
+msg.Text = ""
+msg.ClearTextOnFocus = false
+msg.TextColor3 = Color3.fromRGB(255, 255, 255)
+msg.TextSize = 20.000
+
+vai.Name = "vai"
+vai.Parent = main
+vai.BackgroundColor3 = Color3.fromRGB(135, 63, 208)
+vai.BorderSizePixel = 0
+vai.Position = UDim2.new(0.561038971, 0, 0.725752473, 0)
+vai.Size = UDim2.new(0, 89, 0, 29)
+vai.AutoButtonColor = false
+vai.Font = Enum.Font.SourceSansLight
+vai.Text = "Chat"
+vai.TextColor3 = Color3.fromRGB(255, 255, 255)
+vai.TextSize = 18.000
+
+vai.MouseEnter:Connect(function()
+	game:GetService("TweenService"):Create(vai, TweenInfo.new(0.2), {
+		['BackgroundColor3'] = Color3.fromRGB(122, 57, 191);
+	}):Play();
+end)
+
+vai.MouseLeave:Connect(function()
+	game:GetService("TweenService"):Create(vai, TweenInfo.new(0.2), {
+		['BackgroundColor3'] = Color3.fromRGB(135, 63, 208);
+	}):Play();
+end) 
+
+vai.MouseButton1Click:Connect(function()
+	game:GetService("TweenService"):Create(vai, TweenInfo.new(0.3), {
+		['BackgroundColor3'] = Color3.fromRGB(122, 57, 191);
+	}):Play();
+	wait(0.3)
+	game:GetService("TweenService"):Create(vai, TweenInfo.new(0.3), {
+		['BackgroundColor3'] = Color3.fromRGB(135, 63, 208);
+	}):Play();
+	if game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents") then
+local A_1 = firsttex.Text.."                                                                                                                                                      ".."["..targte.Text.."]: "..msg.Text
+	local A_2 = "All"
+	local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
+	Event:FireServer(A_1, A_2)
+else
+local Channel = game:GetService("TextChatService"):WaitForChild("TextChannels"):WaitForChild("RBXGeneral")
+local A_1 = firsttex.Text.."                                                                                                                                                      "..targte.Text..":  "..msg.Text
+Channel:SendAsync(A_1)
+end
+end)
+
+name.Text = game.Players.LocalPlayer.Name
+
+local Drag = main
+gsCoreGui = game:GetService("CoreGui")
+gsTween = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local dragging
+local dragInput
+local dragStart
+local startPos
+local function update(input)
+	local delta = input.Position - dragStart
+	local dragTime = 0.06
+	local SmoothDrag = {}
+	SmoothDrag.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	local dragSmoothFunction = gsTween:Create(Drag, TweenInfo.new(dragTime, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), SmoothDrag)
+	dragSmoothFunction:Play()
+end
+Drag.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = Drag.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+Drag.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput and dragging and Drag.Size then
+		update(input)
+	end
+end)
