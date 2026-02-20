@@ -1,0 +1,144 @@
+--===============================
+--Sword kill aura by Jawkz
+--Reexecute to undo sword hitbox expansion
+--===============================
+
+
+-- Toggle Logic: Checks if it's already running
+if _G.SwordAuraActive then
+	_G.SwordAuraActive = false
+	-- The loop below will see this flag and clean up automatically
+	warn("OFF: Sword Aura Deactivated")
+	return
+else
+	_G.SwordAuraActive = true
+	warn("ON: Sword Aura Activated")
+end
+
+-- Settings
+local SETTINGS = {
+	TargetToolName = "Axe", -- Exact name of your tool
+	HitboxSize = Vector3.new(25, 25, 25), -- Size of the kill zone
+	ShowHitbox = false, -- Set to true to see a faint red box (for testing)
+}
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Function to create the visual clone and expand the hitbox
+local function enableAura(tool)
+	local handle = tool:FindFirstChild("Handle")
+	if not handle then return end
+	
+	-- Check if already modified
+	if handle:FindFirstChild("AuraActive") then return end
+
+	-- 1. Save Original Stats
+	local originalSize = handle.Size
+	local originalTrans = handle.Transparency
+	
+	-- Mark as active
+	local marker = Instance.new("BoolValue")
+	marker.Name = "AuraActive"
+	marker.Parent = handle
+	
+	-- Store original size to restore later
+	local sizeVal = Instance.new("Vector3Value")
+	sizeVal.Name = "OriginalSize"
+	sizeVal.Value = originalSize
+	sizeVal.Parent = handle
+
+	-- 2. Create the "Ghost" Visual Handle (The one you see)
+	local visualHandle = handle:Clone()
+	visualHandle.Name = "VisualHandle"
+	visualHandle.Transparency = 0 -- Ensure it's visible
+	visualHandle.CanCollide = false
+	visualHandle.Massless = true -- Don't weigh down the hand
+	visualHandle:ClearAllChildren() -- Remove scripts/touch interests from visual only
+
+	-- Copy the Mesh back into the visual handle
+	local originalMesh = handle:FindFirstChildOfClass("SpecialMesh") or handle:FindFirstChild("Mesh")
+	if originalMesh then
+		local newMesh = originalMesh:Clone()
+		newMesh.Parent = visualHandle
+	end
+
+	-- 3. Weld Visual to Real Handle
+	visualHandle.CFrame = handle.CFrame -- Match position exactly
+	visualHandle.Parent = tool
+	
+	local weld = Instance.new("WeldConstraint")
+	weld.Part0 = handle
+	weld.Part1 = visualHandle
+	weld.Parent = visualHandle
+
+	-- 4. Make the Real Handle Massive (The Hitbox)
+	handle.Transparency = SETTINGS.ShowHitbox and 0.8 or 1
+	handle.Size = SETTINGS.HitboxSize
+	handle.CanCollide = false
+	
+	-- Hide the mesh on the massive hitbox so we don't see a giant distorted sword
+	if originalMesh then
+		originalMesh.Scale = Vector3.new(0, 0, 0)
+	end
+end
+
+-- Function to revert changes
+local function disableAura(tool)
+	local handle = tool:FindFirstChild("Handle")
+	if not handle then return end
+	
+	local marker = handle:FindFirstChild("AuraActive")
+	if marker then
+		-- Restore Original Properties
+		local sizeVal = handle:FindFirstChild("OriginalSize")
+		if sizeVal then handle.Size = sizeVal.Value end
+		
+		handle.Transparency = 0 -- Visible again
+		handle.CanCollide = true
+		
+		-- Restore Mesh Scale
+		local mesh = handle:FindFirstChildOfClass("SpecialMesh") or handle:FindFirstChild("Mesh")
+		if mesh then
+			mesh.Scale = Vector3.new(1, 1, 1) -- Assuming 1,1,1 is default
+		end
+		
+		-- Destroy the Ghost Visual
+		local visual = tool:FindFirstChild("VisualHandle")
+		if visual then visual:Destroy() end
+		
+		-- Clean up markers
+		marker:Destroy()
+		if sizeVal then sizeVal:Destroy() end
+	end
+end
+
+-- Main Loop
+task.spawn(function()
+	while _G.SwordAuraActive do
+		-- Check Character
+		if LocalPlayer.Character then
+			local tool = LocalPlayer.Character:FindFirstChild(SETTINGS.TargetToolName)
+			if tool then enableAura(tool) end
+		end
+		
+		-- Check Backpack
+		if LocalPlayer.Backpack then
+			local tool = LocalPlayer.Backpack:FindFirstChild(SETTINGS.TargetToolName)
+			if tool then enableAura(tool) end
+		end
+		
+		task.wait(0.5)
+	end
+	
+	-- Cleanup when loop ends (Toggle OFF)
+	if LocalPlayer.Character then
+		local tool = LocalPlayer.Character:FindFirstChild(SETTINGS.TargetToolName)
+		if tool then disableAura(tool) end
+	end
+	if LocalPlayer.Backpack then
+		local tool = LocalPlayer.Backpack:FindFirstChild(SETTINGS.TargetToolName)
+		if tool then disableAura(tool) end
+	end
+end)
