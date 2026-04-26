@@ -1,0 +1,210 @@
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TitleBar = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local CloseBtn = Instance.new("TextButton")
+local MinimizeBtn = Instance.new("TextButton")
+
+-- 分頁控制
+local TabBar = Instance.new("Frame")
+local Tab1Btn = Instance.new("TextButton")
+local Tab2Btn = Instance.new("TextButton")
+
+-- 內容面板
+local ContentFrame1 = Instance.new("Frame") -- 金幣或單位
+local ContentFrame2 = Instance.new("Frame") -- 標誌
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.Name = "邪惡破解者:))"
+
+-- 主視窗
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 250, 0, 240)
+MainFrame.Position = UDim2.new(0.5, -125, 0.5, -120)
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.BorderSizePixel = 0
+MainFrame.ClipsDescendants = true
+MainFrame.Parent = ScreenGui
+
+-- 標題列
+TitleBar.Name = "TitleBar"
+TitleBar.Size = UDim2.new(1, 0, 0, 35)
+TitleBar.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+TitleBar.Parent = MainFrame
+
+TitleLabel.Size = UDim2.new(0.6, 0, 1, 0)
+TitleLabel.Position = UDim2.new(0.05, 0, 0, 0)
+TitleLabel.Text = "邪惡破解者:))"
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+TitleLabel.Parent = TitleBar
+
+-- 分頁按鈕欄
+TabBar.Name = "TabBar"
+TabBar.Size = UDim2.new(1, 0, 0, 30)
+TabBar.Position = UDim2.new(0, 0, 0, 35)
+TabBar.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+TabBar.Parent = MainFrame
+
+local function styleTabBtn(btn, text, pos)
+    btn.Size = UDim2.new(0.5, 0, 1, 0)
+    btn.Position = pos
+    btn.Text = text
+    btn.Font = Enum.Font.SourceSansBold
+    btn.TextSize = 14
+    btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    btn.TextColor3 = Color3.fromRGB(200, 200, 200)
+    btn.BorderSizePixel = 0
+    btn.Parent = TabBar
+end
+
+styleTabBtn(Tab1Btn, "金幣或單位", UDim2.new(0, 0, 0, 0))
+styleTabBtn(Tab2Btn, "標誌", UDim2.new(0.5, 0, 0, 0))
+Tab1Btn.BackgroundColor3 = Color3.fromRGB(60, 60, 60) -- 預設選中顏色
+
+-- 內容框架設置
+ContentFrame1.Size = UDim2.new(1, 0, 1, -65)
+ContentFrame1.Position = UDim2.new(0, 0, 0, 65)
+ContentFrame1.BackgroundTransparency = 1
+ContentFrame1.Parent = MainFrame
+
+ContentFrame2.Size = UDim2.new(1, 0, 1, -65)
+ContentFrame2.Position = UDim2.new(0, 0, 0, 65)
+ContentFrame2.BackgroundTransparency = 1
+ContentFrame2.Visible = false
+ContentFrame2.Parent = MainFrame
+
+local function styleTextBox(box, placeholder, defaultText, pos, parent)
+    box.Size = UDim2.new(0.85, 0, 0, 35)
+    box.Position = pos
+    box.PlaceholderText = placeholder
+    box.Text = defaultText
+    box.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    box.TextColor3 = Color3.fromRGB(255, 255, 255)
+    box.BorderSizePixel = 0
+    box.Parent = parent
+end
+
+------------------------------
+-- 分頁 1: 金幣或單位
+------------------------------
+local Arg1Input = Instance.new("TextBox")
+local Arg2Input = Instance.new("TextBox")
+local RunButton = Instance.new("TextButton")
+
+styleTextBox(Arg1Input, "參數 1", "輸入", UDim2.new(0.075, 0, 0.1, 0), ContentFrame1)
+styleTextBox(Arg2Input, "Cash, Tower", "輸入", UDim2.new(0.075, 0, 0.4, 0), ContentFrame1)
+
+RunButton.Size = UDim2.new(0.85, 0, 0, 35)
+RunButton.Position = UDim2.new(0.075, 0, 0.7, 0)
+RunButton.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+RunButton.Text = "執行破解"
+RunButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+RunButton.Parent = ContentFrame1
+
+------------------------------
+-- 分頁 2: 標誌
+------------------------------
+local ItemInput = Instance.new("TextBox")
+local InvokeBtn = Instance.new("TextButton")
+
+styleTextBox(ItemInput, "修改項 (例如 Flames)", "Flames", UDim2.new(0.075, 0, 0.2, 0), ContentFrame2)
+
+InvokeBtn.Size = UDim2.new(0.85, 0, 0, 35)
+InvokeBtn.Position = UDim2.new(0.075, 0, 0.5, 0)
+InvokeBtn.BackgroundColor3 = Color3.fromRGB(150, 50, 150)
+InvokeBtn.Text = "執行調用 (Invoke)"
+InvokeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+InvokeBtn.Parent = ContentFrame2
+
+------------------------------
+-- 功能邏輯
+------------------------------
+
+-- 切換分頁
+Tab1Btn.MouseButton1Click:Connect(function()
+    ContentFrame1.Visible = true
+    ContentFrame2.Visible = false
+    Tab1Btn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    Tab2Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+end)
+
+Tab2Btn.MouseButton1Click:Connect(function()
+    ContentFrame1.Visible = false
+    ContentFrame2.Visible = true
+    Tab1Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    Tab2Btn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+end)
+
+-- 分頁 1 邏輯
+RunButton.MouseButton1Click:Connect(function()
+    local randomNum = tostring(math.random(8888, 99910101999)) .. tostring(math.random(8888, 99910101999))
+    local args = { randomNum, Arg1Input.Text, Arg2Input.Text }
+    local event = game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimTier")
+    if event then event:FireServer(unpack(args)) end
+end)
+
+-- 分頁 2 邏輯 (自定義 Flames)
+InvokeBtn.MouseButton1Click:Connect(function()
+    local customItem = ItemInput.Text
+    local args = { customItem, "Tags" }
+    
+    local interactItem = game:GetService("ReplicatedStorage"):WaitForChild("InteractItem", 5)
+    local getData = game:GetService("ReplicatedStorage"):WaitForChild("GetData", 5)
+    
+    if interactItem then interactItem:InvokeServer(unpack(args)) end
+    task.wait(0.1)
+    if getData then getData:InvokeServer() end
+end)
+
+-- 基礎視窗控制 (關閉/縮小/拖動)
+CloseBtn.Name = "CloseBtn"
+CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+CloseBtn.Position = UDim2.new(1, -35, 0, 2.5)
+CloseBtn.Text = "X"
+CloseBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
+CloseBtn.Parent = TitleBar
+
+MinimizeBtn.Name = "MinimizeBtn"
+MinimizeBtn.Size = UDim2.new(0, 30, 0, 30)
+MinimizeBtn.Position = UDim2.new(1, -70, 0, 2.5)
+MinimizeBtn.Text = "_"
+MinimizeBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+MinimizeBtn.Parent = TitleBar
+
+local dragging, dragStart, startPos
+TitleBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+    end
+end)
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+TitleBar.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end end)
+
+local minimized = false
+MinimizeBtn.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    if minimized then
+        ContentFrame1.Visible = false
+        ContentFrame2.Visible = false
+        TabBar.Visible = false
+        MainFrame:TweenSize(UDim2.new(0, 250, 0, 35), "Out", "Quad", 0.15, true)
+        MinimizeBtn.Text = "+"
+    else
+        MainFrame:TweenSize(UDim2.new(0, 250, 0, 240), "Out", "Quad", 0.15, true)
+        task.wait(0.15)
+        TabBar.Visible = true
+        if Tab1Btn.BackgroundColor3 == Color3.fromRGB(60, 60, 60) then ContentFrame1.Visible = true else ContentFrame2.Visible = true end
+        MinimizeBtn.Text = "_"
+    end
+end)
+
+CloseBtn.MouseButton1Click:Connect(function() ScreenGui:Destroy() end)
