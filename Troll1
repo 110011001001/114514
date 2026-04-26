@@ -1,9 +1,5 @@
--- 設定區
-local INTERVAL = 1.0 -- 建議至少 1 秒，否則會被踢出遊戲
-local SPLIT_BY_LINE = true -- 是否逐行發送 (藝術圖建議設為 true)
-
-local art = [[
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+local interval = 0.5 -- 雖然你想要快，但 0.01 秒絕對會被踢出伺服器，建議至少 0.5 秒
+local art = [[""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""" ..'^^,,,,,,,,,^^^''. """"""""""""""""""""""""""""
 """"""""""""""""""""" ':!+[(rYw*@$$$@@BB%8WM#*ooaaaaahhhkkkkkkkkkkkhhhhaa*M%$$Z?^"""""""""""""""""""
 """"""""""""""""^-nLa$$$@B%%bXn)?---[})|(}?+<<-]}|||)}1|({?-[/[l.""""""""""" }J%%Ji """"""""""""""""
@@ -28,57 +24,28 @@ Y$dr} 'q-"" -*$W """""""" IO$$$h"""""""""""" ..  ".?W$} :~(vCqa0^""".I<J$$$WO,""
 """'C$| ""!w$$#,?$b+""[$8/,I_|XUd$@wYv(-~r%$(. """"""",M$u,[/Q@$$$$$$$$O^"'c$B) """"""""":J$Bx'"""""
 """ J$/ ""!m$$$$$$$Qi w$O"""""" 1$Y^"""""?*@<""""""">x08$$$$$$$$bt+^ W%| 1M$u'""""""""""?a$J'"""""""
 """ U$/ "";Q$$$$$$$$$$$$$$$$$$@$$$$$@@@@@$$$$@@$$$$$$$$$$$$u!, """"""!$$$$L:"""""""""""{8$1 """"""""
-""" U$t ""^X$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@MaO?, 1$0I""""""" !O$Bz:""""""""""" ($B) """""""""
-""" J$t """[*Bf@$8h@$$$$$$$$$$$$$$$$$$$$$Mqb@$c;' """"""+a$f'"""'?QB$Q? """"""""""""lq$b~"""""""""""
-"""'C$\ """ t8B?@%r?a$Y:>u$Bx-++{0$qi.  """,h$ """"""""""<d$Y'rb@$0?'"""""""""""""-q$B1.""""""""""""
-"""^L$(""""""<8$8)'"!*$C"'v$hI"""]MB+"""""".h$:"""""""""'\M$$$@z: """"!u> ""!Y:")W$W!"""""""""""""""
-""",Q${"""""""";Ya%$$$$@n[1b$W+I,!Q$uI^^^,;~*$m-](zbW$$%*bU?^""",>{X}' l?vt:^_O$%Jl """"""""""""""""
-""";O$_""""""""""""';~1jvzULOwpbhao***oahbdwZLCYcn/]i, """".-\{|+''])11;'+ua$BJ['"""""""""""""""""""
-"""iq$!"" ,^"""!c<"""""""""""""""""""""""""""""""""""" -ct?!^"lxf?!^"IUa@$p(; """"""""""""""""""""""
-"""_ho;"" ]} """",jL+' """"""""""""""""     ... ^+zC/;..']zr< " ^1d$$$W|^"""""""""""""""""""""""""""
+""" U$t ""^X$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@MaO?, 1$0I""""""" !O$Bz:""""""""--- ($B) """""""""
 ]]
 
--- 執行主體
 task.spawn(function()
     local replicatedStorage = game:GetService("ReplicatedStorage")
+    -- 等待事件，增加超時判斷防止腳本卡死
     local events = replicatedStorage:WaitForChild("Events", 10)
+    if not events then return warn("找不到 Events 資料夾") end
     
-    if not events then
-        warn("錯誤: 找不到 Events 資料夾，請確認該遊戲是否使用此路徑")
-        return
-    end
-
     local chatEvent = events:WaitForChild("Chat", 10)
-    if not chatEvent then
-        warn("錯誤: 找不到 Chat 事件")
-        return
-    end
-
-    -- 將藝術圖切分成行
-    local lines = {}
-    for line in art:gmatch("[^\r\n]+") do
-        table.insert(lines, line)
-    end
-
-    print("腳本已啟動，開始發送 ASCII Art...")
+    if not chatEvent then return warn("找不到 Chat RemoteEvent") end
 
     while true do
-        if SPLIT_BY_LINE then
-            -- 逐行發送，增加成功機率
-            for _, line in ipairs(lines) do
-                local success, err = pcall(function()
-                    chatEvent:FireServer(line)
-                end)
-                if not success then warn("發送失敗: " .. err) end
-                task.wait(0.1) -- 行與行之間極短暫停
-            end
-        else
-            -- 整包發送 (容易被過濾)
-            pcall(function()
-                chatEvent:FireServer(art)
-            end)
+        -- 使用 pcall 確保發送失敗（如字串過長被攔截）時腳本不會停止
+        local success, err = pcall(function()
+            chatEvent:FireServer(art)
+        end)
+        
+        if not success then
+            warn("發送失敗 (可能是字串太長或頻率過快): " .. tostring(err))
         end
-
-        task.wait(INTERVAL)
+        
+        task.wait(interval)
     end
 end)
