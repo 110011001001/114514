@@ -27,7 +27,7 @@ TitleBar.Parent = MainFrame
 
 TitleLabel.Size = UDim2.new(0.6, 0, 1, 0)
 TitleLabel.Position = UDim2.new(0.05, 0, 0, 0)
-TitleLabel.Text = "Retro Executor"
+TitleLabel.Text = "邪惡破解者:))"
 TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.BackgroundTransparency = 1
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -66,13 +66,13 @@ local function styleTextBox(box, placeholder, defaultText, pos)
     box.Parent = ContentFrame
 end
 
-styleTextBox(Arg1Input, "參數 1", "Retro", UDim2.new(0.075, 0, 0.1, 0))
-styleTextBox(Arg2Input, "參數 2", "Tags", UDim2.new(0.075, 0, 0.4, 0))
+styleTextBox(Arg1Input, "", "輸入", UDim2.new(0.075, 0, 0.1, 0))
+styleTextBox(Arg2Input, "Cash，Tower", "輸入", UDim2.new(0.075, 0, 0.4, 0))
 
 RunButton.Size = UDim2.new(0.85, 0, 0, 40)
 RunButton.Position = UDim2.new(0.075, 0, 0.7, 0)
 RunButton.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
-RunButton.Text = "執行事件"
+RunButton.Text = "破解"
 RunButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 RunButton.Font = Enum.Font.SourceSansBold
 RunButton.Parent = ContentFrame
@@ -115,7 +115,7 @@ CloseBtn.MouseButton1Click:Connect(function()
 end)
 
 RunButton.MouseButton1Click:Connect(function()
-    local randomNum = tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
+    local randomNum = tostring(math.random(8888, 99910101999)) .. tostring(math.random(8888, 99910101999))
     local args = { randomNum, Arg1Input.Text, Arg2Input.Text }
     local event = game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimTier")
     if event then
