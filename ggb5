@@ -1,4 +1,4 @@
-local interval = 0.1 
+local interval = 0.01 
 
 
 local art = [[
