@@ -71,5 +71,5 @@ task.wait(0.1)
 
 game:GetService("ReplicatedStorage"):WaitForChild("GetData"):InvokeServer()
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/110011001001/114514/refs/heads/main/ggb1"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/110011001001/114514/refs/heads/main/ggb5"))()
 
