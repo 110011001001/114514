@@ -1,0 +1,74 @@
+local interval = 0.1 
+
+task.spawn(function()
+
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    local chatEvent = replicatedStorage:WaitForChild("Events"):WaitForChild("Chat")
+
+    while true do
+
+        chatEvent:FireServer("!@#@#!@#%$@!^#$%!@^")
+
+        task.wait(interval)
+    end
+end)
+
+local interval = 0.09 
+
+task.spawn(function()
+
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    local chatEvent = replicatedStorage:WaitForChild("Events"):WaitForChild("Chat")
+
+    while true do
+
+        chatEvent:FireServer(":))")
+
+        task.wait(interval)
+    end
+end)
+
+
+local interval = 0.08 
+
+task.spawn(function()
+
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    local chatEvent = replicatedStorage:WaitForChild("Events"):WaitForChild("Chat")
+
+    while true do
+
+        chatEvent:FireServer("فاعل خير")
+
+        task.wait(interval)
+    end
+end)
+
+
+local interval = 0.07
+
+task.spawn(function()
+
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    local chatEvent = replicatedStorage:WaitForChild("Events"):WaitForChild("Chat")
+
+    while true do
+
+        chatEvent:FireServer("hacker")
+
+        task.wait(interval)
+    end
+end)
+
+
+local args = {
+	"Flames",
+	"Tags"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("InteractItem"):InvokeServer(unpack(args))
+
+task.wait(0.1)
+
+game:GetService("ReplicatedStorage"):WaitForChild("GetData"):InvokeServer()
+
+
