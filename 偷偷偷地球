@@ -1,0 +1,50 @@
+local PromptService = game:GetService("ProximityPromptService")
+local CoreGui = game:GetService("CoreGui")
+local Enabled = false
+local Cache = {}
+
+if CoreGui:FindFirstChild("FastInteract") then CoreGui.FastInteract:Destroy() end
+
+local Gui = Instance.new("ScreenGui", CoreGui)
+Gui.Name = "FastInteract"
+Gui.ResetOnSpawn = false
+
+local Btn = Instance.new("TextButton", Gui)
+Btn.Size = UDim2.new(0, 120, 0, 40)
+Btn.Position = UDim2.new(0.05, 0, 0.4, 0)
+Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Btn.Text = "即時互動: 關"
+Btn.TextColor3 = Color3.fromRGB(255, 100, 100)
+Btn.TextSize = 16
+Btn.Font = Enum.Font.SourceSansBold
+Btn.Active = true
+Btn.Draggable = true
+
+Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 8)
+
+PromptService.PromptShown:Connect(function(prompt)
+    if not Cache[prompt] then Cache[prompt] = prompt.HoldDuration end
+    if Enabled then prompt.HoldDuration = 0 end
+end)
+
+Btn.MouseButton1Click:Connect(function()
+    Enabled = not Enabled
+    if Enabled then
+        Btn.Text = "即時互動: 開"
+        Btn.BackgroundColor3 = Color3.fromRGB(30, 60, 30)
+        Btn.TextColor3 = Color3.fromRGB(100, 255, 100)
+        for _, p in ipairs(workspace:GetDescendants()) do
+            if p:IsA("ProximityPrompt") then
+                if not Cache[p] then Cache[p] = p.HoldDuration end
+                p.HoldDuration = 0
+            end
+        end
+    else
+        Btn.Text = "即時互動: 關"
+        Btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        Btn.TextColor3 = Color3.fromRGB(255, 100, 100)
+        for p, duration in pairs(Cache) do
+            if p and p.Parent then p.HoldDuration = duration end
+        end
+    end
+end)
