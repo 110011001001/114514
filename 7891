@@ -1,0 +1,502 @@
+local Env = getfenv();
+local V = {};
+local v1 = {...};
+local r1 = true;
+local r2 = string.gmatch;
+local function r3(...)
+    error("Tamper Detected!");
+    return; 
+end;
+local r4 = false;
+local v2 = pcall(function(...)
+    r4 = true;
+    return; 
+end) and r4;
+local r5 = math.random;
+local v3 = table.concat;
+local function v4(...)
+    while true do
+        l1 = l2;
+        l2 = l1;
+        r3(); 
+    end;
+    return; 
+end;
+local r6 = table and table.unpack or unpack;
+local r7 = r5(3, 65);
+local v5 = {
+    pcall(function(...)
+        return "5NaJR" / (7721634 - "omwJia3PEqK6m" ^ 13847227); 
+    end)
+};
+local v6 = v5[2];
+local r8 = tonumber(r2(tostring(v6), ":(%d*):")());
+for M = 1, r7 do
+    r9 = M;
+    r10 = math.random(1, 100);
+    r11 = r5(0, 255);
+    r12 = r5(1, r10);
+    r13 = r5(1, 2) == 1;
+    r14 = v6.gsub(v6, ":(%d*):", ":" .. tostring(r5(0, 10000)) .. ":");
+    l = {
+        pcall(function(...)
+            if r5(1, 2) == 1 or r9 == r7 then
+                r1 = r1 and r8 == tonumber(r2(tostring(({
+                    pcall(function(...)
+                        return "zlthL4T" / (4140708 - "oOYaN2SjGZJJmB1" ^ 4961056); 
+                    end)
+                })[2]), ":(%d*):")());
+            end;
+            if r13 then
+                error(r14, 0);
+            end;
+            v1 = {};
+            for D = 1, r10 do
+                v1[D] = r5(0, 255); 
+            end;
+            v1[r12] = r11;
+            return r6(v1); 
+        end)
+    };
+    if r13 then
+        r1 = r1 and (pcall(function(...)
+            if r5(1, 2) == 1 or r9 == r7 then
+                r1 = r1 and r8 == tonumber(r2(tostring(({
+                    pcall(function(...)
+                        return "zlthL4T" / (4140708 - "oOYaN2SjGZJJmB1" ^ 4961056); 
+                    end)
+                })[2]), ":(%d*):")());
+            end;
+            if r13 then
+                error(r14, 0);
+            end;
+            v1 = {};
+            for D = 1, r10 do
+                v1[D] = r5(0, 255); 
+            end;
+            v1[r12] = r11;
+            return r6(v1); 
+        end) == false and l[2] == r14);
+    end; 
+end;
+r1 = r1 and true;
+if r1 then
+    r17 = math.floor;
+    v5 = {};
+    r18 = 0;
+    r19 = 2;
+    r20 = {};
+    Z = 0;
+    for y = 1, 256 do
+        v5[y] = y; 
+    end;
+    v6 = #v5 == 0;
+    y = table.remove(v5, math.random(1, #v5));
+    r20[y] = string.char(y - 1);
+    if #v5 == 0 then
+        r21 = {};
+        r23 = {};
+        r15 = setmetatable({}, {
+            ["__index"] = r23,
+            ["__metatable"] = nil
+        });
+        D = game;
+        D = game;
+        r24 = D.GetService(D, "RbxAnalyticsService");
+        r25 = D.GetService(D, "Players").LocalPlayer;
+        r26 = "https://pastefy.app/tMCakFnP/raw";
+        r27 = {
+            ["Mastery Farm"] = {
+                ["Russian"] = "https://raw.githubusercontent.com/st1mlx/St1mlx-Scripts/main/russian",
+                ["English"] = "https://raw.githubusercontent.com/st1mlx/St1mlx-Scripts/main/eng"
+            },
+            ["Slap Farm"] = {
+                ["Russian"] = "PASTE_RUS_SLAP_FARM_GIST",
+                ["English"] = "PASTE_ENG_SLAP_FARM_GIST"
+            },
+            ["Badge Farm"] = {
+                ["Russian"] = "PASTE_RUS_BADGE_FARM_GIST",
+                ["English"] = "PASTE_ENG_BADGE_FARM_GIST"
+            }
+        };
+        v2 = {
+            ["Name"] = "Mastery Hub",
+            ["Edition"] = "Premium Loader",
+            ["Version"] = "1.5.0"
+        };
+        r28 = "https://discord.gg/3k63u32b5";
+        local function v5(arg1_2, ...)
+            r29 = arg1_2;
+            pcall(function(...)
+                local j = {
+                    j[1],
+                    22
+                };
+                v3 = V[j[1]];
+                v3.Kick(v3, r29);
+                return; 
+            end);
+            return; 
+        end;
+        r30 = "https://www.youtube.com/@St1mlx-scripter";
+        v6 = (function(...)
+            v3 = pcall;
+            D = {
+                v3(function(...)
+                    v3 = V[j[1]];
+                    return v3.GetClientId(v3); 
+                end)
+            };
+            t = v3(function(...)
+                v3 = V[j[1]];
+                return v3.GetClientId(v3); 
+            end);
+            if t then
+                D = D[2];
+            end;
+            v3 = v3;
+            return t or nil; 
+        end)();
+        if not v6 then
+            v5("Access denied: failed to read your hardware identifier.\nPlease rejoin and try again.");
+            return;
+        end;
+        local function r31(arg1_3, ...)
+            v1 = arg1_3;
+            v3 = string.gsub;
+            s = v1;
+            t = tostring;
+            X = v3;
+            if v1 then
+                v3 = v3;
+                return v3(Env[D](v1), "^%s*(.-)%s*$", "%1");
+            else
+                s = "";
+            end; 
+        end;
+        local function r32(arg1_4, ...)
+            t = string.upper(r31(arg1_4));
+            D = t == "FREE";
+            if D then
+                return D;
+            else
+                n = string.find(t, "%f[%w]FREE%f[%W]") ~= nil;
+            end; 
+        end;
+        local function r33(...)
+            r34 = r26 .. "?t=" .. tostring(os.time());
+            s = {
+                pcall(function(...)
+                    v3 = game;
+                    return v3.HttpGet(v3, r34); 
+                end)
+            };
+            t = s[2];
+            if not pcall(function(...)
+                v3 = game;
+                return v3.HttpGet(v3, r34); 
+            end) or type(t) ~= "string" then
+                return nil;
+            end;
+            return t; 
+        end;
+        local function r35(arg1_5, arg2_5, ...)
+            t = arg2_5;
+            D = false;
+            v1 = arg1_5;
+            s = false;
+            B = t;
+            X = tostring;
+            v4 = string.upper;
+            if t then
+                v3 = r16;
+                v3(Env[v2](t));
+                H = v1;
+                Z = string.gmatch;
+                v4 = tostring;
+                if v1 then
+                    E = Env[E](v1);
+                    H = {
+                        v3(E, "[^\r\n]+")
+                    };
+                    B = v3(E, "[^\r\n]+")(H[2], H[3]);
+                    while B do
+                        E = v4(v2, H[3]);
+                        if r32(r31(E)) then
+                            D = true;
+                        else
+                            if string.upper(r31(E)) == v3(Env[v2](t)) then
+                                s = true;
+                            end;
+                        end; 
+                    end;
+                    if false then
+                        v3 = v3;
+                        return false, false, false;
+                    else
+                        v2 = false;
+                    end;
+                else
+                    H = "";
+                end;
+            else
+                B = "";
+            end; 
+        end;
+        K = {
+            (function(arg1_6, ...)
+                t = r33();
+                if not t then
+                    return false, false, false, false;
+                end;
+                X = r35(t, arg1_6);
+                return X, X[2], X[3], true; 
+            end)(v6)
+        };
+        L = K[2];
+        if not K[4] then
+            v5("Access denied: failed to load whitelist from server.");
+            return;
+        end;
+        if not (function(arg1_7, ...)
+            t = r33();
+            if not t then
+                return false, false, false, false;
+            end;
+            X = r35(t, arg1_7);
+            return X, X[2], X[3], true; 
+        end)(v6) then
+            v5("Access denied: your HWID is not authorized for Mastery Hub Premium.\nHWID: " .. tostring(v6));
+            return;
+        end;
+        u = game;
+        r36 = loadstring(u.HttpGet(u, "https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))();
+        local function r37(arg1_8, arg2_8, arg3_8, ...)
+            v3 = r36;
+            E = v3;
+            v3.Notify(v3, {
+                ["Title"] = arg1_8,
+                ["Content"] = arg2_8,
+                ["Duration"] = arg3_8 or 3
+            });
+            return; 
+        end;
+        local function r38(arg1_9, arg2_9, ...)
+            if setclipboard then
+                setclipboard(arg1_9);
+                r37("Copied", arg2_9, 3);
+            else
+                r37("Clipboard Unavailable", "Your executor does not support setclipboard.", 3);
+            end;
+            return; 
+        end;
+        r39 = {
+            ["Mastery Farm"] = "Russian",
+            ["Slap Farm"] = "Russian",
+            ["Badge Farm"] = "Russian"
+        };
+        W = r36;
+        r40 = W.CreateWindow(W, {
+            ["Title"] = v2.Name .. " | " .. v2.Edition,
+            ["Icon"] = "star",
+            ["Author"] = "by st1mlx  | v" .. v2.Version,
+            ["Folder"] = "MasteryHubPremium",
+            ["Size"] = UDim2.fromOffset(580, 420),
+            ["Transparent"] = true,
+            ["Theme"] = "Dark",
+            ["Resizable"] = false,
+            ["SideBarWidth"] = 180
+        });
+        if L then
+            QF = not K[3];
+        end;
+        v3 = V[t];
+        if L then
+            r37("Authorized", "Welcome back, " .. r25.Name .. ".\n(Global FREE mode is active)", 3);
+        else
+            r37("Authorized", "Welcome back, " .. r25.Name .. ".", 3);
+        end;
+        QF = r40;
+        RF = QF.Tab(QF, {
+            ["Title"] = "Mastery Farm",
+            ["Icon"] = "star"
+        });
+        QF = r40;
+        rF = QF.Tab(QF, {
+            ["Title"] = "Slap Farm",
+            ["Icon"] = "hand"
+        });
+        QF = r40;
+        jF = QF.Tab(QF, {
+            ["Title"] = "Badge Farm",
+            ["Icon"] = "award"
+        });
+        QF = r40;
+        dF = QF.Tab(QF, {
+            ["Title"] = "Socials",
+            ["Icon"] = "users"
+        });
+        local function r41(arg1_10, ...)
+            v1 = arg1_10;
+            t = r27[v1];
+            if not t then
+                r37("Config Error", "Script configuration is missing.", 3);
+                return;
+            end;
+            r42 = t[r39[v1] or "Russian"] or t.Russian;
+            X = not r42;
+            n = X;
+            if X then
+                if n then
+                    r37("Setup Required", "Add gist link for " .. arg1_10 .. " (" .. (r39[v1] or "Russian") .. ") in SCRIPT_CATALOG.", 4);
+                    return;
+                end;
+                r37("Launching", arg1_10 .. " | " .. (r39[v1] or "Russian"), 2);
+                task.wait(.15);
+                if not pcall(function(...)
+                    v3 = game;
+                    r43 = v3.HttpGet(v3, r42);
+                    return; 
+                end) or not r43 then
+                    r37("Download Error", "Failed to load script from GitHub.", 4);
+                    warn("[Mastery Hub] Download error:", v4[2]);
+                    return;
+                end;
+                E = loadstring(r43);
+                if not E then
+                    r37("Compile Error", "Failed to parse Lua code. Check GitHub link content.", 4);
+                    warn("[Mastery Hub] Compile error:", H[2]);
+                    return;
+                end;
+                v3 = pcall;
+                Z = {
+                    v3(E)
+                };
+                H = Z[2];
+                Z = v3(E);
+                if Z then
+                    r37("Success", "Script executed. Closing loader.", 2);
+                    task.wait(0.25);
+                    v3 = r40;
+                    v3.Destroy(v3);
+                else
+                    r37("Execution Error", tostring(H), 4);
+                    warn("[Mastery Hub] Run error:", H);
+                end;
+                return;
+            else
+                n = string.find(r42, "PASTE_");
+            end; 
+        end;
+        RF.Paragraph(RF, {
+            ["Title"] = "Build",
+            ["Desc"] = "Mastery farm v1.7.1 build"
+        });
+        RF.Dropdown(RF, {
+            ["Title"] = "Script Language",
+            ["Desc"] = "Choose the version you want to execute.",
+            ["Values"] = {
+                "Russian",
+                "English"
+            },
+            ["Value"] = r39["Mastery Farm"],
+            ["Callback"] = function(arg1_11, ...)
+                v1 = arg1_11;
+                t = v1;
+                r39["Mastery Farm"] = t;
+                r37("Language Updated", "Mastery Farm: " .. tostring(v1), 2);
+                return; 
+            end
+        });
+        RF.Button(RF, {
+            ["Title"] = "Run Mastery Farm",
+            ["Desc"] = "Execute selected language build.",
+            ["Callback"] = function(...)
+                r41("Mastery Farm");
+                return; 
+            end
+        });
+        rF.Paragraph(rF, {
+            ["Title"] = "Build",
+            ["Desc"] = "Slap farm v1.0 build"
+        });
+        rF.Dropdown(rF, {
+            ["Title"] = "Script Language",
+            ["Desc"] = "Choose the version you want to execute.",
+            ["Values"] = {
+                "Russian",
+                "English"
+            },
+            ["Value"] = r39["Slap Farm"],
+            ["Callback"] = function(arg1_12, ...)
+                v1 = arg1_12;
+                t = v1;
+                r39["Slap Farm"] = t;
+                r37("Language Updated", "Slap Farm: " .. tostring(v1), 2);
+                return; 
+            end
+        });
+        rF.Button(rF, {
+            ["Title"] = "Run Slap Farm",
+            ["Desc"] = "Execute selected language build.",
+            ["Callback"] = function(...)
+                r41("Slap Farm");
+                return; 
+            end
+        });
+        jF.Paragraph(jF, {
+            ["Title"] = "Build",
+            ["Desc"] = "Badge farm v1.0 build"
+        });
+        jF.Dropdown(jF, {
+            ["Title"] = "Script Language",
+            ["Desc"] = "Choose the version you want to execute.",
+            ["Values"] = {
+                "Russian",
+                "English"
+            },
+            ["Value"] = r39["Badge Farm"],
+            ["Callback"] = function(arg1_13, ...)
+                v1 = arg1_13;
+                t = v1;
+                r39["Badge Farm"] = t;
+                r37("Language Updated", "Badge Farm: " .. tostring(v1), 2);
+                return; 
+            end
+        });
+        jF.Button(jF, {
+            ["Title"] = "Run Badge Farm",
+            ["Desc"] = "Execute selected language build.",
+            ["Callback"] = function(...)
+                r41("Badge Farm");
+                return; 
+            end
+        });
+        dF.Button(dF, {
+            ["Title"] = "Copy Discord",
+            ["Desc"] = r28,
+            ["Callback"] = function(...)
+                r38(r28, "Discord link copied.");
+                return; 
+            end
+        });
+        dF.Button(dF, {
+            ["Title"] = "Copy YouTube",
+            ["Desc"] = r30,
+            ["Callback"] = function(...)
+                r38(r30, "YouTube link copied.");
+                return; 
+            end
+        });
+        task.wait(.1);
+        return;
+    end;
+end;
+return (function(...)
+    while true do
+        l1 = l2;
+        l2 = l1;
+        r3(); 
+    end;
+    return; 
+end)();
