@@ -1,0 +1,183 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+
+local scriptName = "Mastery Hub"
+local scriptEdition = "Premium Loader"
+local scriptVersion = "1.5.0"
+local youtubeLink = "https://www.youtube.com/@St1mlx-scripter"
+local pastefyLink = "https://pastefy.app/tMCakFnP/raw"
+
+local scriptCatalog = {
+    ["Mastery Farm"] = {
+        ["Russian"] = "https://raw.githubusercontent.com/st1mlx/St1mlx-Scripts/main/russian",
+        ["English"] = "https://raw.githubusercontent.com/st1mlx/St1mlx-Scripts/main/eng"
+    },
+    ["Slap Farm"] = {
+        ["Russian"] = "PASTE_RUS_SLAP_FARM_GIST",
+        ["English"] = "PASTE_ENG_SLAP_FARM_GIST"
+    },
+    ["Badge Farm"] = {
+        ["Russian"] = "PASTE_RUS_BADGE_FARM_GIST",
+        ["English"] = "PASTE_ENG_BADGE_FARM_GIST"
+    }
+}
+
+local selectedLanguages = {
+    ["Mastery Farm"] = "Russian",
+    ["Slap Farm"] = "Russian",
+    ["Badge Farm"] = "Russian"
+}
+
+local function notify(title, content, duration)
+    WindUI:Notify({
+        ["Title"] = title,
+        ["Content"] = content,
+        ["Duration"] = duration or 3
+    })
+end
+
+local function copyToClipboard(text, successMessage)
+    if setclipboard then
+        setclipboard(text)
+        notify("已複製", successMessage, 3)
+    else
+        notify("複製失敗", "您的執行器不支援 setclipboard 功能。", 3)
+    end
+end
+
+local function runScript(featureName)
+    local config = scriptCatalog[featureName]
+    if not config then
+        notify("配置錯誤", "找不到該功能的腳本設定。", 3)
+        return
+    end
+
+    local currentLang = selectedLanguages[featureName] or "Russian"
+    local scriptUrl = config[currentLang] or config.Russian
+
+    if not scriptUrl or string.find(scriptUrl, "PASTE_") then
+        notify("需要設定", "原作者尚未在此版本中填寫 " .. featureName .. " (" .. currentLang .. ") 的遠端網址。", 4)
+        return
+    end
+
+    notify("載入中", "正在獲取 " .. featureName .. " | " .. currentLang .. " ...", 2)
+    task.wait(0.15)
+
+    local success, scriptRaw = pcall(function()
+        return game:HttpGet(scriptUrl)
+    end)
+
+    if not success or not scriptRaw then
+        notify("下載錯誤", "無法從 GitHub 獲取腳本原始碼。", 4)
+        return
+    end
+
+    local compiledScript, compileError = loadstring(scriptRaw)
+    if not compiledScript then
+        notify("編譯錯誤", "無法解析下載的 Lua 程式碼。", 4)
+        warn("[Mastery Hub]", compileError)
+        return
+    end
+
+    local runSuccess, runError = pcall(compiledScript)
+    if runSuccess then
+        notify("成功", "腳本執行完畢，正在關閉載入器介面。", 2)
+        task.wait(0.25)
+        if window then window:Destroy() end
+    else
+        notify("執行錯誤", "腳本在運行時發生崩潰。", 4)
+        warn("[Mastery Hub]", runError)
+    end
+end
+
+local window = WindUI:CreateWindow({
+    ["Title"] = scriptName .. " | " .. scriptEdition,
+    ["Icon"] = "star",
+    ["Author"] = "by st1mlx | v" .. scriptVersion,
+    ["Folder"] = "MasteryHubPremium",
+    ["Size"] = UDim2.fromOffset(580, 420),
+    ["Transparent"] = true,
+    ["Theme"] = "Dark",
+    ["Resizable"] = false,
+    ["SideBarWidth"] = 180
+})
+
+notify("認證成功", "歡迎回來，" .. LocalPlayer.Name .. "。", 3)
+
+local tabMastery = window:Tab({ ["Title"] = "Mastery Farm", ["Icon"] = "star" })
+tabMastery:Paragraph({ ["Title"] = "版本資訊", ["Desc"] = "Mastery farm v1.7.1 build" })
+tabMastery:Dropdown({
+    ["Title"] = "腳本語言",
+    ["Desc"] = "選擇您想要執行的語言版本。",
+    ["Values"] = { "Russian", "English" },
+    ["Value"] = selectedLanguages["Mastery Farm"],
+    ["Callback"] = function(value)
+        selectedLanguages["Mastery Farm"] = value
+        notify("語言已更新", "Mastery Farm 已切換至: " .. tostring(value), 2)
+    end
+})
+tabMastery:Button({
+    ["Title"] = "運行 Mastery Farm",
+    ["Desc"] = "執行所選語言版本的腳本。",
+    ["Callback"] = function()
+        runScript("Mastery Farm")
+    end
+})
+
+local tabSlap = window:Tab({ ["Title"] = "Slap Farm", ["Icon"] = "hand" })
+tabSlap:Paragraph({ ["Title"] = "版本資訊", ["Desc"] = "Slap farm v1.0 build" })
+tabSlap:Dropdown({
+    ["Title"] = "腳本語言",
+    ["Desc"] = "選擇您想要執行的語言版本。",
+    ["Values"] = { "Russian", "English" },
+    ["Value"] = selectedLanguages["Slap Farm"],
+    ["Callback"] = function(value)
+        selectedLanguages["Slap Farm"] = value
+        notify("語言已更新", "Slap Farm 已切換至: " .. tostring(value), 2)
+    end
+})
+tabSlap:Button({
+    ["Title"] = "運行 Slap Farm",
+    ["Desc"] = "執行所選語言版本的腳本。",
+    ["Callback"] = function()
+        runScript("Slap Farm")
+    end
+})
+
+local tabBadge = window:Tab({ ["Title"] = "Badge Farm", ["Icon"] = "award" })
+tabBadge:Paragraph({ ["Title"] = "版本資訊", ["Desc"] = "Badge farm v1.0 build" })
+tabBadge:Dropdown({
+    ["Title"] = "腳本語言",
+    ["Desc"] = "選擇您想要執行的語言版本。",
+    ["Values"] = { "Russian", "English" },
+    ["Value"] = selectedLanguages["Badge Farm"],
+    ["Callback"] = function(value)
+        selectedLanguages["Badge Farm"] = value
+        notify("語言已更新", "Badge Farm 已切換至: " .. tostring(value), 2)
+    end
+})
+tabBadge:Button({
+    ["Title"] = "運行 Badge Farm",
+    ["Desc"] = "執行所選語言版本的腳本。",
+    ["Callback"] = function()
+        runScript("Badge Farm")
+    end
+})
+
+local tabSocials = window:Tab({ ["Title"] = "Socials", ["Icon"] = "users" })
+tabSocials:Button({
+    ["Title"] = "複製 Discord 連結",
+    ["Desc"] = pastefyLink,
+    ["Callback"] = function()
+        copyToClipboard(pastefyLink, "Discord 連結已複製到剪貼簿。")
+    end
+})
+tabSocials:Button({
+    ["Title"] = "複製 YouTube 連結",
+    ["Desc"] = youtubeLink,
+    ["Callback"] = function()
+        copyToClipboard(youtubeLink, "YouTube 連結已複製到剪貼簿。")
+    end
+})
