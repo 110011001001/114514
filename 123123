@@ -1,0 +1,82 @@
+local Players = game:GetService("Players")
+local AnalyticsService = game:GetService("RbxAnalyticsService")
+
+local LocalPlayer = Players.LocalPlayer
+
+local Config = {
+    Name = "Mastery Hub",
+    Edition = "Premium Loader",
+    Version = "1.9.2"
+}
+
+local Urls = {
+    Whitelist = "https://pastefy.app/tMCakFnP/raw",
+    Blacklist = "https://pastefy.app/iBLKH58Z/raw"
+}
+
+local Scripts = {
+    ["Mastery Farm"] =
+        "https://raw.githubusercontent.com/st1mlx/St1mlx-Scripts/refs/heads/main/script",
+
+    ["Slap Farm"] =
+        "PASTE_SLAP_FARM_GIST",
+
+    ["Badge Farm"] =
+        "PASTE_BADGE_FARM_GIST"
+}
+
+local function HttpGet(url)
+    local success, result = pcall(function()
+        return game:HttpGet(url .. "?t=" .. os.time())
+    end)
+
+    if success then
+        return result
+    end
+
+    return nil
+end
+
+local function GetClientId()
+    local success, clientId = pcall(function()
+        return AnalyticsService:GetClientId()
+    end)
+
+    if success then
+        return clientId
+    end
+
+    return nil
+end
+
+local function Kick(message)
+    pcall(function()
+        LocalPlayer:Kick(message)
+    end)
+end
+
+local ClientId = GetClientId()
+
+if not ClientId then
+    Kick("Failed to get client id")
+    return
+end
+
+-- 黑名單下載
+local BlacklistData = HttpGet(Urls.Blacklist)
+
+-- 白名單下載
+local WhitelistData = HttpGet(Urls.Whitelist)
+
+-- 原版在這裡做 HWID / 白名單驗證
+-- 已移除
+
+local SelectedScript = Scripts["Mastery Farm"]
+
+if SelectedScript and SelectedScript ~= "" then
+    local Source = HttpGet(SelectedScript)
+
+    if Source then
+        loadstring(Source)()
+    end
+end
